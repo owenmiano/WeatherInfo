@@ -2,6 +2,7 @@ import React from 'react'
 import {View,StyleSheet} from 'react-native'
 import { enableLatestRenderer } from 'react-native-maps'
 import Map from './src/components/map/Map'
+import WeatherData from './src/components/weather/WeatherData';
 function App() {
   enableLatestRenderer();
   return (

@@ -136,6 +136,7 @@ android {
 
     defaultConfig {
         applicationId "com.weatherapp"
+        manifestPlaceholders = [API_KEY: "$System.env.Google_Maps_API_KEY"]
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
