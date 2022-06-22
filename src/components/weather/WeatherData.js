@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View,Text,Image,ScrollView,RefreshControl} from 'react-native';
+import { StyleSheet, View,Text,Image} from 'react-native';
 import {COLORS} from '../utils/index'
 import Temperature from 'react-native-vector-icons/FontAwesome5'
 import Humidity from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -7,10 +7,9 @@ import Wind from 'react-native-vector-icons/MaterialCommunityIcons'
 import Pressure from 'react-native-vector-icons/MaterialCommunityIcons'
 import Location from 'react-native-vector-icons/Entypo'
 
-
 const {PRIMARY_COLOR,SECONDARY_COLOR,BORDER_COLOR}=COLORS
 
-function WeatherData({currentWeather,refresh,refreshing}) {
+function WeatherData({currentWeather}) {
     let {name,
         main:{temp,feels_like,pressure,humidity},
         weather:[details],
@@ -20,14 +19,7 @@ function WeatherData({currentWeather,refresh,refreshing}) {
     const iconUrl=`https://openweathermap.org/img/wn/${icon}@4x.png`
   return (
        <View style={styles.container}>
-      <ScrollView 
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={refresh}
-          />
-        }
-      >
+    
 <View style={styles.weatherDetailsRow}>
          <View style={styles.weatherDetailsBox}>
            {/* feels like section */}
@@ -70,7 +62,7 @@ function WeatherData({currentWeather,refresh,refreshing}) {
           <View style={styles.weatherDetailsBox}>
             {/* humidity section */}
             <View style={styles.weatherDetailsRow}>
-           <Humidity name="water" size={30} color={PRIMARY_COLOR}/>
+           <Humidity name={humidity >60 ? "water" : humidity >40 ? "water-outline": "water-off-outline" } size={30} color={PRIMARY_COLOR}/>
            <View style={styles.weatherDetailsItems}>
            <Text>Humidity :</Text>  
             <Text style={styles.textSecondary}>{humidity} %</Text>
@@ -106,7 +98,7 @@ function WeatherData({currentWeather,refresh,refreshing}) {
           </View>
            
            </View>
-           </ScrollView> 
+      
        </View>
     
   )
