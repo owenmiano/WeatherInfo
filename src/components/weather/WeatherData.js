@@ -18,7 +18,7 @@ function WeatherData({currentWeather}) {
     const {icon,main,description}=details;
     const iconUrl=`https://openweathermap.org/img/wn/${icon}@4x.png`
   return (
-       <View style={styles.container}>
+       <SafeAreaView style={styles.container}>
     
 <View style={styles.weatherDetailsRow}>
          <View style={styles.weatherDetailsBox}>
@@ -99,7 +99,7 @@ function WeatherData({currentWeather}) {
            
            </View>
       
-       </View>
+       </SafeAreaView>
     
   )
 }
