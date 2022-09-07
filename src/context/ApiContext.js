@@ -11,41 +11,55 @@ export const ApiProvider=({children})=>{
 
      const[refreshing,setRefreshing]=useState(false)
      const[forecast,setForecast]=useState(null)
-     const [latitude,setLatitude]=useState(null)
-    const [longitude,setLongitude]=useState(null)
+     const [latitude,setLatitude]=useState(0)
+    const [longitude,setLongitude]=useState(0)
 
-     const loadForecast=async()=>{
-        
-        try {
-            setRefreshing(true)
-            const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
-            if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-               Alert.alert("Permission to access location was denied")
-            }
-            // get location coordinates
-           await Geolocation.getCurrentPosition(position => {
-            setLatitude(position.coords.latitude)
-            setLongitude (position.coords.longitude)
-           },
-           (error) => alert(error),
-            { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
-         )
-            
+   //   const getPosition=async()=>{
+   //       try {
+           
+
+           
+   
+   //       } catch (error) {
+   //          console.log(error.message)
+   //       }
+ 
+   //   }
+     
+     
             // fetch the weather data from the openweathermap api
-        await axios.get(`${API_URL}lat=${latitude}&lon=${longitude}&appid=${Weather_API_KEY}`)
+const loadForecast=async()=>{
+            try{
+               setRefreshing(true)
+                const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
+               if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+                  Alert.alert("Permission to access location was denied")
+               }
+               await Geolocation.getCurrentPosition(position => {
+                  setLatitude(position.coords.latitude)
+                  setLongitude (position.coords.longitude)
+                  // loadForecast(position.coords.latitude,position.coords.longitude)
+                 })
+
+        await axios.get(`${API_URL}lat=${latitude.toString()}&lon=${longitude.toString()}&appid=${Weather_API_KEY}`)
         .then(res=>{
         let WeatherData=res.data;
         console.log(WeatherData)
         setForecast(WeatherData)
-         setRefreshing(false)
+        setRefreshing(false)
         })
     } catch (error) {
             setRefreshing(false)
             console.log(error.message) 
         }
+      
      }
+   
+   
+
+
      useEffect(()=>{
-        loadForecast()
+       loadForecast()
       },[])
      
     return (

@@ -4,13 +4,13 @@ import Spinner from 'react-native-loading-spinner-overlay'
 import Humidity from 'react-native-vector-icons/MaterialCommunityIcons'
 import Wind from 'react-native-vector-icons/MaterialCommunityIcons'
 import Pressure from 'react-native-vector-icons/MaterialCommunityIcons'
-import { ApiContext } from '../../context/ApiContext'
+import { ApiContext } from '../context/ApiContext'
 import Temperature from 'react-native-vector-icons/FontAwesome5'
-import {COLORS} from '../utils/index'
+import {COLORS} from '../components/utils/index'
 
 const {PRIMARY_COLOR,SECONDARY_COLOR,BORDER_COLOR}=COLORS
 
-function WeatherInfo() {
+function WeatherInfoScreen() {
     const {forecast,refreshing,loadForecast}=useContext(ApiContext)
     let {name,
         main:{temp,feels_like,pressure,humidity},
@@ -129,4 +129,4 @@ const styles=StyleSheet.create({
     }
         
 })
-export default WeatherInfo
+export default WeatherInfoScreen
