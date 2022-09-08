@@ -35,37 +35,38 @@ const loadForecast=async()=>{
                if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
                   Alert.alert("Permission to access location was denied")
                }
-               await Geolocation.getCurrentPosition(position => {
+               await Geolocation.getCurrentPosition((position) => {
                   setLatitude(position.coords.latitude)
                   setLongitude (position.coords.longitude)
                   // loadForecast(position.coords.latitude,position.coords.longitude)
-                 })
-
-        await axios.get(`${API_URL}lat=${latitude.toString()}&lon=${longitude.toString()}&appid=${Weather_API_KEY}`)
-        .then(res=>{
-        let WeatherData=res.data;
-        console.log(WeatherData)
-        setForecast(WeatherData)
-        setRefreshing(false)
-        })
-    } catch (error) {
+                   axios.get(`${API_URL}lat=${latitude}&lon=${longitude}&appid=${Weather_API_KEY}`)
+                  .then(res=>{
+                  let WeatherData=res.data;
+                  console.log(WeatherData)
+                  setForecast(WeatherData)
+                  setRefreshing(false)
+                  })
+                },
+                error => console.log('Error', JSON.stringify(error)),
+               //  {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000},
+                )
+ } catch (error) {
             setRefreshing(false)
             console.log(error.message) 
         }
       
      }
-   
-   
 
-
-     useEffect(()=>{
+ useEffect(()=>{
        loadForecast()
-      },[])
+      },[latitude,longitude])
      
     return (
         <ApiContext.Provider 
         value={{
         forecast,
+        latitude,
+        longitude,
          refreshing,
          loadForecast
           }}>

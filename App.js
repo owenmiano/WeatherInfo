@@ -1,9 +1,12 @@
 import React from 'react'
 import Temporary from './src/screens/Temporary'
-// import WeatherInfo from './src/components/screens/WeatherInfo'
 import { ApiProvider } from './src/context/ApiContext'
+import MapScreen from './src/screens/MapScreen'
+import {enableLatestRenderer} from 'react-native-maps';
 
+enableLatestRenderer();
 function App() {
+
   return (
           <>
         

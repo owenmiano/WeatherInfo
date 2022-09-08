@@ -11,7 +11,7 @@ import WeatherInfoScreen from './WeatherInfoScreen'
 import MapScreen from './MapScreen'
 
 //Screen names
-const MapName = "Map";
+const MapName = "Location";
 const WeatherInfo = "Weather";
 
 const Tab = createBottomTabNavigator();
