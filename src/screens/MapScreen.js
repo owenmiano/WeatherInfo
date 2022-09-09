@@ -1,6 +1,6 @@
 import React,{useContext} from 'react'
-import MapView from 'react-native-maps';
-import { View,StyleSheet } from 'react-native'
+import MapView, { Callout, Circle, Marker } from 'react-native-maps';
+import { View,StyleSheet ,Text} from 'react-native'
 import { ApiContext } from '../context/ApiContext';
 
 
@@ -10,15 +10,20 @@ function MapScreen() {
   return (
   <View style={styles.container}>
   <MapView style={styles.map}
+   zoomEnabled={true}
    initialRegion={{
-    latitude: 37.78825,
-         longitude: -122.4324,
-         latitudeDelta: 0.015,
-         longitudeDelta: 0.0121,
+    latitude:latitude,
+         longitude: longitude,
+         latitudeDelta: 0.005,
+         longitudeDelta: 0.0005,
   }}
 >
-
-  
+<Marker
+coordinate={{ latitude : latitude , longitude : longitude }}>
+<Callout>
+  <Text>You are here</Text>
+</Callout>
+</Marker>
 </MapView>
       
   </View>

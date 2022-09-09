@@ -18,8 +18,8 @@
         android:theme="@style/AppTheme">
  
         <meta-data
-     android:name="com.google.android.geo.API_KEY"
-     android:value="${API_KEY}"/>
+     android:name="com.google.android.maps.v2.API_KEY"
+     android:value="AIzaSyDU35QRZ9zhGlDDd7Os1fAngZyJIvDFnsU"/>
 
         <activity
             android:name=".SplashActivity"
